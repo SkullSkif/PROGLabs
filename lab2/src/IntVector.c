@@ -107,10 +107,9 @@ int int_vector_shrink_to_fit(IntVector *v)
         return 0;   
     if (v->size==v->capacity)
         return 0;  
-    int* shdata = (int*)realloc(v->data,v->size*sizeof(int));
-    if (shdata==NULL)
+    v->data = (int*)realloc(v->data,v->size*sizeof(int));
+    if (v->data==NULL)
         return -1;   
-    v->data = shdata;
     v->capacity = v->size;
     return 0;
 }
@@ -124,14 +123,12 @@ int int_vector_reserve(IntVector* v, size_t new_capacity)
         return 0;
     }
 
-    int* new_data = (int*)realloc(v->data, new_capacity * sizeof(int));
+    v->data = (int*)realloc(v->data, new_capacity * sizeof(int));
 
-    if (!new_data) {
+    if (v->data==NULL)
         return -1;
-    }
-
-    v->data = new_data;
     v->capacity = new_capacity;
 
     return 0;
 }
+
