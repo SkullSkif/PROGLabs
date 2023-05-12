@@ -60,5 +60,7 @@ int int_vector_resize(IntVector *v, size_t new_size);
 Результат: 0 в случае успеха, -1 в случае ошибки. Если не удалось изменить емкость, массив остается в исходном состоянии.*/
 int int_vector_reserve(IntVector *v, size_t new_capacity);
 
+void int_vector_print(IntVector* v);
+
 
 

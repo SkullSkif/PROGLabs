@@ -114,6 +114,29 @@ int int_vector_shrink_to_fit(IntVector *v)
     return 0;
 }
 
+int int_vector_resize(IntVector *v, size_t new_size)
+{
+    if (v==NULL)
+        return -1;
+    int* new = NULL;
+    if (v->size==new_size)
+        return 0;
+    if (v->size>new_size)
+        return 0;
+    if (v->size<new_size)
+        {
+            if (v->capacity<new_size)
+            {
+                new = realloc(v->data, new_size * sizeof(int));
+                }
+                v->capacity = new_size
+            }
+        for (int i = v->size;i<new_size;i++)
+            v->data[i] = 0;
+        v->size = new_size;
+        }
+}
+
 int int_vector_reserve(IntVector* v, size_t new_capacity)
 {
     if (!v) {
@@ -130,5 +153,13 @@ int int_vector_reserve(IntVector* v, size_t new_capacity)
     v->capacity = new_capacity;
 
     return 0;
+}
+
+void int_vector_print(IntVector* v)
+{
+    printf("Вектор: ");
+    for (int i = 0;i<v->size;i++)
+        printf("%d ",v->data[i]);
+    printf("\nРазмер вектора: %ld\nЕмкость вектора: %ld\n",v->size,v->capacity);
 }
 
